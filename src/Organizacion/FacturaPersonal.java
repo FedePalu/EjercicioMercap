@@ -10,7 +10,7 @@ public class FacturaPersonal {
 	Calendar fecha = Calendar.getInstance();
 	List<Llamada> llamadasFinalizadas = new ArrayList<>();
 	Llamada llamadaActual;
-	int montoBasico;
+	double montoBasico;
 	
 	public FacturaPersonal(int montoBasico) {
 		this.montoBasico = montoBasico;
@@ -18,8 +18,8 @@ public class FacturaPersonal {
 	
 	// Para hallar la factura se debe especificar el mes
 	public double facturar(int mes) {
-		if(!esValidoElMes(mes)) throw new FacturacionInvalidaException("El mes indicado está fuera del rango (0-11)");
-		double monto = llamadasFinalizadas.stream().filter(llamada -> llamada.mesInicio() == mes).mapToDouble(llamada -> llamada.facturarLlamada()).sum();
+		if(!esValidoElMes(mes)) throw new FacturacionInvalidaException("El mes indicado estÃ¡ fuera del rango (0-11)");
+		double monto = montoBasico + llamadasFinalizadas.stream().filter(llamada -> llamada.mesInicio() == mes).mapToDouble(llamada -> llamada.facturarLlamada()).sum();
 		return monto;	
 	}
 	
